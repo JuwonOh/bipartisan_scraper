@@ -1,6 +1,6 @@
 # bipartisan_scraper
 
-미국의 씽크탱크인(Bipartisan Policy Center)의 검색자료들(korea를 검색한 blog자료)을 받아오기 위한 크롤러입니다.
+미국의 씽크탱크인(Bipartisan Policy Center)의 자료들(blog, press realease)을 받아오기 위한 크롤러입니다.
 
 ## User guide
 
@@ -14,10 +14,16 @@ python scraping_latest_news.py
 ```
 
 ```
-[1 / 50] (Monday, August 6, 2018) The Goal is Workable Bipartisanship
-Stop scrapping. 1 / 50 news was scrapped
-The oldest news has been created after 2018-07-01
-
+[1 / 10] (Monday, February 4, 2019) Previewing the 2019 State of the Union
+[2 / 10] (Thursday, January 31, 2019) A Roadmap for a DACA Deal
+[3 / 10] (Thursday, January 31, 2019) Healthy Congress Index: 115th Congress Functioned Poorly, Derelict in Basic Duties
+[4 / 10] (Thursday, January 31, 2019) Healthy Congress Index Q & A with John Fortier
+[5 / 10] (Wednesday, January 30, 2019) State and Local Governments Take On Deferred Maintenance
+[6 / 10] (Tuesday, January 22, 2019) Blockchain Shows Promise for Open Data, but Is Not a Silver Bullet
+[7 / 10] (Tuesday, January 22, 2019) History Shows the U.S. Doesn’t Do Well at Preparing for Migration Crises
+[8 / 10] (Thursday, January 17, 2019) GREAT(er) Transformation for Federal Grant Process Focus of House Bill
+[9 / 10] (Friday, January 11, 2019) The House Has New Rules. Now It Needs Bold Leaders.
+[10 / 10] (Wednesday, January 9, 2019) Where Will the Next Migrant Flow Come From? A Look at Venezuela and Nicaragua
 ```
 
 특정한 페이지를 parse하기 위해서는
