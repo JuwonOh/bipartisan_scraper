@@ -2,42 +2,70 @@ from .utils import get_soup
 from .utils import now
 
 def parse_page(url):
-    """
-    Argument
-    --------
-    url : str
-        Web page url
+    if 'blog/' in url:
+        return parse_blog(url)
+    if '/press-release/' in url:
+        return parse_press_release(url)
+    return None
 
-    Returns
-    -------
-    json_object : dict
-        JSON format web page contents
-        It consists with
-            title : article title
-            time : article written time
-            content : text with line separator \\n
-            url : web page url
-            scrap_time : scrapped time
-    """
+def parse_blog(url):
+    def parse_author(soup):
+        author = soup.find('div', class_='meta').text
+        if not author:
+            return ''
+        return author[3:]
 
-    try:
-        soup = get_soup(url)
+    def parse_title(soup):
         title = soup.find('h1').text
-        time = soup.find('p', class_= 'date').text
-        author = soup.find('p', class_='author-callout').text[3:]
+        if not title:
+            return ''
+        return title
+
+    def parse_date(soup):
+        date = soup.find('p', class_= 'date').text
+        if not date:
+            return ''
+        return date
+
+    def parse_content(soup):
         temp_content = soup.find('div', class_= 'post').find_all()
         content = '\n'.join([p.text.strip() for p in temp_content])
+        if not content:
+            return ''
+        return content
 
-        json_object = {
-            'title' : title,
-            'time' : time,
-            'content' : content,
-            'url' : url,
-            'author' : author,
-            'scrap_time' : now()
-        }
-        return json_object
-    except Exception as e:
-        print(e)
-        print('Parsing error from {}'.format(url))
-        return None
+    soup = get_soup(url)
+    return {
+        'url': url,
+        'title': parse_title(soup),
+        'date': parse_date(soup),
+        'author': parse_author(soup),
+        'content': parse_content(soup)
+    }
+
+def parse_press_release(url):
+    def parse_title(soup):
+        title = soup.find('h1')
+        if not title:
+            return ''
+        return title.text
+
+    def parse_date(soup):
+        span = soup.find('p', class_ = 'date')
+        if not span:
+            return ''
+        return span.text
+
+    def parse_content(soup):
+        p = soup.find('div', class_ = 'post')
+        if not p:
+            return ''
+        return p.text
+
+    soup = get_soup(url)
+    return {
+        'url': url,
+        'title': parse_title(soup),
+        'date': parse_date(soup),
+        'content': parse_content(soup)
+    }
