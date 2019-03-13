@@ -1,10 +1,15 @@
 import re
 import time
 from .parser import parse_page
+<<<<<<< HEAD
 from .utils import get_soup
 from .utils import news_dateformat
 from .utils import user_dateformat
 from .utils import strf_to_datetime
+=======
+from dateutil.parser import parse
+from .utils import get_soup
+>>>>>>> final commit
 
 patterns = [
     re.compile('https://bipartisanpolicy.org/[\w]+')]
@@ -33,7 +38,11 @@ def yield_latest_allblog(begin_date, max_num=10, sleep=1.0):
     """
 
     # prepare parameters
+<<<<<<< HEAD
     d_begin = strf_to_datetime(begin_date, user_dateformat)
+=======
+    d_begin = parse(begin_date)
+>>>>>>> final commit
     end_page = 72
     n_news = 0
     outdate = False
@@ -57,9 +66,17 @@ def yield_latest_allblog(begin_date, max_num=10, sleep=1.0):
         for url in links_all:
 
             news_json = parse_page(url)
+<<<<<<< HEAD
 
             # check date
             d_news = strf_to_datetime(news_json['date'], news_dateformat)
+=======
+            if None == news_json:
+                return None
+
+            # check date
+            d_news = news_json['date']
+>>>>>>> final commit
             if d_begin > d_news:
                 outdate = True
                 print('Stop scrapping. {} / {} news was scrapped'.format(n_news, max_num))
@@ -123,7 +140,11 @@ def yield_latest_allpress(begin_date, max_num=10, sleep=1.0):
     """
 
     # prepare parameters
+<<<<<<< HEAD
     d_begin = strf_to_datetime(begin_date, user_dateformat)
+=======
+    d_begin = parse(begin_date)
+>>>>>>> final commit
     end_page = 72
     n_news = 0
     outdate = False
@@ -147,9 +168,17 @@ def yield_latest_allpress(begin_date, max_num=10, sleep=1.0):
         for url in links_all:
 
             news_json = parse_page(url)
+<<<<<<< HEAD
 
             # check date
             d_news = strf_to_datetime(news_json['date'], news_dateformat)
+=======
+            if None == news_json:
+                return None
+
+            # check date
+            d_news = news_json['date']
+>>>>>>> final commit
             if d_begin > d_news:
                 outdate = True
                 print('Stop scrapping. {} / {} news was scrapped'.format(n_news, max_num))
