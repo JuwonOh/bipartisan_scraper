@@ -5,6 +5,3 @@ from .scraper import yield_latest_allpress
 from .scraper import get_allpress_urls
 from .scraper import get_last_page_num
 from .utils import get_soup
-from .utils import strf_to_datetime
-from .utils import news_dateformat
-from .utils import user_dateformat
